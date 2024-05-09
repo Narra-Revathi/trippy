@@ -14,6 +14,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const backendURL = "https://trippy-backend-x63v.onrender.com";
 
   // Handle input change
   const handleChange = (e) => {
@@ -27,7 +28,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/user/login", {
+      const { data } = await axios.post(`${backendURL}/api/v1/user/login`, {
         email: inputs.email,
         password: inputs.password,
       });

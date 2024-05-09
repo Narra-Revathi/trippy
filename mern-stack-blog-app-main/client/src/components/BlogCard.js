@@ -27,10 +27,11 @@ export default function BlogCard({
     navigate(`/blog-details/${id}`);
 
   };
+  const backendURL = "https://trippy-backend-x63v.onrender.com";
 
   const handleDelete = async () => {
     try {
-      const { data } = axios.delete(`/api/v1/blog/delete-blog/${id}`);
+      const { data } = axios.delete(`${backendURL}/api/v1/blog/delete-blog/${id}`);
 
       if (data?.success) {
         alert("Blog Deleted");

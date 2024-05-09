@@ -22,7 +22,8 @@ const CreateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/blog/create-blog", {
+      const backendURL = "https://trippy-backend-x63v.onrender.com";
+      const { data } = await axios.post(`${backendURL}/api/v1/blog/create-blog`, {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,

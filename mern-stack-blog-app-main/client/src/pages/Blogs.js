@@ -11,7 +11,8 @@ const Blogs = () => {
   // Function to fetch all blogs
   const getAllBlogs = async () => {
     try {
-      const { data } = await axios.get("/api/v1/blog/all-blog");
+      const backendURL = "https://trippy-backend-x63v.onrender.com";
+      const { data } = await axios.get(`${backendURL}/api/v1/blog/all-blog`);
       if (data?.success) {
         setBlogs(data?.blogs);
         setLoading(false);

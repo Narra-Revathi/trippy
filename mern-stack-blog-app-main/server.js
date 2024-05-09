@@ -9,8 +9,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 //router import
-const userRoutes = require("./routes/userRoutes");
-const blogRoutes = require("./routes/blogRoutes");
+const userRoutes = require('./routes/userRoutes');
+
+const blogRoutes = require('./routes/blogRoutes');
 
 //rest objecct
 const app = express();
@@ -32,12 +33,12 @@ const connectDB = async () => {
     console.log(`MONGO Connect Error ${error}`.bgRed.white);
   }
 };
-
+const backendurl = "https://fascinating-klepon-a6b34e.netlify.app/";
 connectDB(); // Call the function to connect to MongoDB
 
 //routes
-app.use("/api/v1/user", userRoutes);
-app.use("/api/v1/blog", blogRoutes);
+app.use(`${backendurl}/api/v1/user`, userRoutes);
+app.use(`${backendurl}/api/v1/blog`, blogRoutes);
 
 // Port
 const PORT = process.env.PORT || 8080;

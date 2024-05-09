@@ -12,6 +12,7 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const backendURL = "https://trippy-backend-x63v.onrender.com";
 
   //handle input change
   const handleChange = (e) => {
@@ -25,7 +26,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/user/register", {
+      const { data } = await axios.post(`${backendURL}/api/v1/user/register`, {
         username: inputs.name,
         email: inputs.email,
         password: inputs.password,

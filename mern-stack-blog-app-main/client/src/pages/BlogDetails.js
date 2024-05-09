@@ -3,15 +3,19 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
+
 const BlogDetails = () => {
   const [blog, setBlog] = useState({});
   const id = useParams().id;
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
+  // Set the backend URL
+  const backendURL = "https://trippy-backend-x63v.onrender.com";
+
   // get blog details
   const getBlogDetail = async () => {
     try {
-      const { data } = await axios.get(`/api/v1/blog/get-blog/${id}`);
+      const { data } = await axios.get(`${backendURL}/api/v1/blog/get-blog/${id}`);
       if (data?.success) {
         setBlog(data?.blog);
         setInputs({
@@ -36,11 +40,12 @@ const BlogDetails = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
   //form
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`/api/v1/blog/update-blog/${id}`, {
+      const { data } = await axios.put(`${backendURL}/api/v1/blog/update-blog/${id}`, {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,
@@ -54,9 +59,9 @@ const BlogDetails = () => {
       console.log(error);
     }
   };
-  console.log(blog);
+
   return (
-    <v>
+    <div>
       <form onSubmit={handleSubmit}>
         <Box
           width={"50%"}
@@ -122,7 +127,7 @@ const BlogDetails = () => {
           </Button>
         </Box>
       </form>
-    </v>
+    </div>
   );
 };
 
