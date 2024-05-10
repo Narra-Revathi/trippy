@@ -12,7 +12,8 @@ const Register = () => {
     email: "",
     password: "",
   });
-  const backendURL = "https://trippy-backend-x63v.onrender.com";
+  const backendURL = "https://trippy-backend-5kp0.onrender.com";
+
 
   //handle input change
   const handleChange = (e) => {

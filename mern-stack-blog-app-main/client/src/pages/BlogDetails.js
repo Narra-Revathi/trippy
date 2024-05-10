@@ -1,37 +1,32 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
 
 const BlogDetails = () => {
-  const [blog, setBlog] = useState({});
+  const [inputs, setInputs] = useState({});
   const id = useParams().id;
   const navigate = useNavigate();
-  const [inputs, setInputs] = useState({});
-  // Set the backend URL
-  const backendURL = "https://trippy-backend-x63v.onrender.com";
-
-  // get blog details
-  const getBlogDetail = async () => {
-    try {
-      const { data } = await axios.get(`${backendURL}/api/v1/blog/get-blog/${id}`);
-      if (data?.success) {
-        setBlog(data?.blog);
-        setInputs({
-          title: data?.blog.title,
-          description: data?.blog.description,
-          image: data?.blog.image,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const backendURL = "https://trippy-backend-5kp0.onrender.com";
 
   useEffect(() => {
-    getBlogDetail();
-  }, [id]);
+    const getBlogDetail = async () => {
+      try {
+        const { data } = await axios.get(`${backendURL}/api/v1/blog/get-blog/${id}`);
+        if (data?.success) {
+          setInputs({
+            title: data?.blog.title,
+            description: data?.blog.description,
+            image: data?.blog.image,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getBlogDetail(); // Call the function directly inside the useEffect
+  }, [id]); // Removed getBlogDetail from the dependency array
 
   // input change
   const handleChange = (e) => {
@@ -41,20 +36,17 @@ const BlogDetails = () => {
     }));
   };
 
-  //form
+  // form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(`${backendURL}/api/v1/blog/update-blog/${id}`, {
+      await axios.put(`${backendURL}/api/v1/blog/update-blog/${id}`, {
         title: inputs.title,
         description: inputs.description,
         image: inputs.image,
         user: id,
       });
-      if (data?.success) {
-        toast.success("Blog Updated");
-        navigate("/my-blogs");
-      }
+      navigate("/my-blogs");
     } catch (error) {
       console.log(error);
     }

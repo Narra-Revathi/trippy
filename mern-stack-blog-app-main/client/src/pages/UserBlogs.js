@@ -8,7 +8,8 @@ const UserBlogs = () => {
   const getUserBlogs = async () => {
     try {
       const id = localStorage.getItem("userId");
-      const backendURL = "https://trippy-backend-x63v.onrender.com";
+      const backendURL = "https://trippy-backend-5kp0.onrender.com";
+
       const { data } = await axios.get(`${backendURL}/api/v1/blog/user-blog/${id}`);
       if (data?.success) {
         setBlogs(data?.userBlog.blogs);

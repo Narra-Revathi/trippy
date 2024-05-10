@@ -14,7 +14,8 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const backendURL = "https://trippy-backend-x63v.onrender.com";
+  const backendURL = "https://trippy-backend-5kp0.onrender.com";
+
 
   // Handle input change
   const handleChange = (e) => {

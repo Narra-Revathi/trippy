@@ -10,7 +10,6 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Box, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import axios from "axios";
 
 export default function BlogCard({
@@ -27,7 +26,7 @@ export default function BlogCard({
     navigate(`/blog-details/${id}`);
 
   };
-  const backendURL = "https://trippy-backend-x63v.onrender.com";
+  const backendURL = "https://trippy-backend-5kp0.onrender.com";
 
   const handleDelete = async () => {
     try {
@@ -85,4 +84,3 @@ export default function BlogCard({
     </Card>
   );
 }
-//blocard

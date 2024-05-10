@@ -5,23 +5,25 @@ const mongoose = require("mongoose");
 const colors = require("colors");
 const dotenv = require("dotenv");
 
-//env config
+// Environment configuration
 dotenv.config();
 
-//router import
+// Router imports
 const userRoutes = require('./routes/userRoutes');
-
 const blogRoutes = require('./routes/blogRoutes');
 
-//rest objecct
+// Express app initialization
 const app = express();
 
-//middelwares
-app.use(cors());
+// Middleware setup
+app.use(cors({
+  origin: 'https://tourblog.netlify.app', // Allow your frontend URL
+  optionsSuccessStatus: 200
+}));
 app.use(express.json());
 app.use(morgan("dev"));
 
-//mongodb connection
+// MongoDB connection
 const connectDB = async () => {
   try {
     await mongoose.connect(`mongodb+srv://revathinarra9010:revathi123@cluster1.ithabpo.mongodb.net/?retryWrites=true&w=majority&appName=cluster1`);
@@ -33,20 +35,18 @@ const connectDB = async () => {
     console.log(`MONGO Connect Error ${error}`.bgRed.white);
   }
 };
-const backendurl = "https://fascinating-klepon-a6b34e.netlify.app/";
-connectDB(); // Call the function to connect to MongoDB
 
-//routes
-app.use(`${backendurl}/api/v1/user`, userRoutes);
-app.use(`${backendurl}/api/v1/blog`, blogRoutes);
+connectDB();
+// Route registration
+app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/blog', blogRoutes);
 
-// Port
+// Port configuration
 const PORT = process.env.PORT || 8080;
 
-//listen
+// Server listening
 app.listen(PORT, () => {
   console.log(
-    `Server Running on ${process.env.DEV_MODE} mode port no ${PORT}`.bgCyan
-      .white
+    `Server Running on ${process.env.DEV_MODE || 'production'} mode on port ${PORT}`.bgCyan.white
   );
 });
